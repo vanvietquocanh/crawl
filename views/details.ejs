@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<title><%-titleName%></title>
+    <%-cdn.bootstrapCSS%>
+    <%-cdn.jquery%>
+    <%-cdn.popper%>
+    <%-cdn.bootstrapJS%>
+    <%-cdn.roboto%>
+    <%-cdn.fontawesome%>
+    <%-cdn.tagsinputJS%>
+    <%-cdn.scrolltop%>
+    <%-cdn.tagsinputCSS%>
+    <%-cdn.ionrangeSliderJS%>
+    <%-cdn.ionrangeSliderCSS%>
+    <%-cdn.SwiperCSS%>
+    <%-cdn.SwiperJS%>
+</head>
+<body>
+	<style>
+	    body {
+	      background: #fff;
+	      font-size: 14px;
+	      color: #000;
+	      margin: 0;
+	      padding: 0;
+	    }
+
+	    .swiper-container {
+	      width: 100%;
+	      padding-top: 50px;
+	      padding-bottom: 50px;
+	    }
+
+	    .swiper-slide {
+	      background-position: center;
+	      background-size: cover;
+	      width: 300px;
+	      height: 300px;
+
+	    }
+	</style>
+	<div class="main-page w-100">
+		<div class="swiper-container w-100">
+	    	<div class="swiper-wrapper">
+	    		<%for(let img of data.images){%>
+		      		<div class="swiper-slide" style="background-image:url(<%-img%>)"></div>
+	    		<%}%>
+	    	</div>
+	  	</div>
+	  	<h6 class="">Tên sản phẩm : <%-data.name%><%-(data.code)?" - ":""%></h6>
+	  	<h6 class="">Mã sản phẩm  : <%-data.code%></h6>
+	  	<h6 class="">Giá sản phẩm : <%-data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")%> VNĐ</h6>
+	  	<h6>Màu  : <%-data.color.join(", ")%></h6>
+	  	<h6>Rate : <%-data.rate%><i class="fas text-warning fa-star"></i></h6>
+	  	<div class="w-100 d-flex">
+	  		<div class="w-75"><%-data.description.split("data-src").join("src")%></div>
+	  		<table class="table table-hover table-dark w-25">
+		  		<tbody>
+		  			<%-data.specifications%>
+		  		</tbody>
+		  	</table>
+	  	</div>
+	</div>
+  	<script>
+	    $(document).ready(function() {
+	    	var swiper = new Swiper('.swiper-container', {
+		      	effect: 'coverflow',
+		      	grabCursor: true,
+		      	centeredSlides: true,
+		      	slidesPerView: 'auto',
+		      	coverflowEffect: {
+		        	rotate: 50,
+		        	stretch: 0,
+		        	depth: 100,
+		        	modifier: 1,
+		        	slideShadows: true,
+		      	}
+		    });
+	    });
+  	</script>
+</body>
+</html>

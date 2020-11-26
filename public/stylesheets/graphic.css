@@ -1,0 +1,22 @@
+.fixed-bottom-left {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: 999999 !important;
+  min-width: max-content !important; }
+
+.fixed-bottom-right {
+  position: fixed !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  z-index: 999999 !important;
+  min-width: max-content !important; }
+
+.fixed-top-right {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  z-index: 999999 !important;
+  min-width: max-content !important; }
+
+/*# sourceMappingURL=graphic.css.map */

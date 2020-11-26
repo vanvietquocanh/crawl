@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Admin</title>
+	<title><%-titleName%></title>
+    <%-cdn.bootstrapCSS%>
+    <%-cdn.jquery%>
+    <%-cdn.popper%>
+    <%-cdn.bootstrapJS%>
+    <%-cdn.roboto%>
+    <%-cdn.fontawesome%>
+    <%-cdn.tagsinputJS%>
+    <%-cdn.scrolltop%>
+    <%-cdn.tagsinputCSS%>
+    <%-cdn.ionrangeSliderJS%>
+    <%-cdn.ionrangeSliderCSS%>
+    <%-cdn.SwiperCSS%>
+    <%-cdn.SwiperJS%>
+</head>
+<body>
+	<style>
+		*{
+			font-size: 12px;
+		}
+		td{
+			line-height: 4.5em;
+		}
+	</style>
+	<table class="table table-hover table-dark">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Image</th>
+				<th>Name</th>
+				<th>Price(VNĐ)</th>
+				<th>Color</th>
+				<th>Code</th>
+				<th>URL</th>
+			</tr>
+		</thead>
+  		<tbody>
+  			<%if(data){%>
+				<%for(let [i, item] of data.entries()){%>
+			<tr>
+		      	<th scope="row"><%-i+1%></th>
+		      	<td><img src="<%-item.images[0]%>" style="max-width: 60px" alt=""></td>
+		      	<td><%-item.name%></td>
+		      	<td><%-item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")%></td>
+		      	<td><%-item.color.join(", ")%></td>
+		      	<td><%-item.code%></td>
+		      	<td><a href="<%-item.url%>"><%-item.url%></a></td>
+		    </tr>	
+				<%}%>
+  			<%}%>
+  		</tbody>
+  	</table>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%-titleName.split("-").join(" ")%> Page</title>
+    <%-cdn.socketio%>
+    <%-cdn.bootstrapCSS%>
+    <%-cdn.jquery%>
+    <%-cdn.popper%>
+    <%-cdn.bootstrapJS%>
+    <%-cdn.roboto%>
+    <%-cdn.fontawesome%>
+    <%-cdn.tagsinputJS%>
+    <%-cdn.scrolltop%>
+    <%-cdn.tagsinputCSS%>
+    <%-cdn.ionrangeSliderJS%>
+    <%-cdn.ionrangeSliderCSS%>
+    <link rel="stylesheet" href="../stylesheets/styledashboard.css">
+    <link rel="stylesheet" href="../stylesheets/graphic.css">
+    <script src="../javascripts/scriptdashboard.js"></script>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<body>
+	<div class="main-page">
+		<form action="/" id="filterForm" class="tab-content d-flex flex-wrap w-100" method="get" accept-charset="utf-8" enctype="application/json">
+	        <div class="form-group col-sm-11 ml-3">
+	        	<input class="" class="form-control" type="number" id="price">
+	        	<input type="text" class="d-none" step="any" id="realPrice" name="price">
+	        </div>
+	        <div class="form-group col-6">
+	            <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+	        </div>
+	        <div class="form-group col-sm">
+	            <input type="text" name="specifications" id="specifications" class="form-control" placeholder="Specifications">
+	        </div>
+	        <input type="text" name="page" value="1" class="d-none">
+	        <div class="form-group">
+	            <button class="form-control btn btn-primary">
+	                <i class="fas fa-search"></i>
+	                Filter
+	            </button>
+	        </div>
+	    </form>
+		<div class="w-100 d-flex flex-wrap">
+			<%if(data&&data.length>0){%>
+		        <%for(let [i,product] of data.entries()){%>
+		        	<div class="card items-custom text-center" id="<%-product._id%>">
+		        		<a href="/details/<%-product._id%>" style="height: 100%">
+							<img class="card-img-top" style="max-width: 150px" src="<%-product.images[0]%>" alt="Card image cap">
+							<div class="card-body">
+							    <h6 class="card-title"><%-product.name%><%-(product.code)?" - ":""%><small><%-product.code%></small></h6>
+							    <div>
+							    	<%for(let sO of product.saleOf){%>
+									    <li class="card-text w-100" style="list-style: none; font-size: 13px">
+									    	<i class="fab text-danger fa-hotjar"></i>&nbsp;<small class="text-dark"><%-sO%></small>
+									    </li>
+								    <%}%>
+							    </div>
+							</div>
+		        		</a>
+						<h6><%-product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")%> VNĐ</h6>
+						<button class="btn btn-danger"><i class="fas fa-shopping-cart"></i> Mua ngay</button>
+					</div>
+		        <%}%>
+		    <%}%>
+		</div>
+		<div class="w-100 d-flex">
+			<div class="w-75"></div>
+		    <div class="w-25" style="min-width: 320px">
+		    	<nav aria-label="Page navigation d-flex">
+			        <ul class="pagination">
+			            <button class="btn btn-primary mr-2" id="gotoPage">Go to</button>
+			            <input class="form-control no-disable-controller w-50" id="numberPage" type="number" value="<%-pageCurrent%>"><h6 class="pageOfSite">&nbsp;/ <%-Number(page)%> Page</h6>
+			        </ul>
+			    </nav>
+		    </div>
+		</div>	
+	</div>
+	<script>
+		$("#gotoPage").click(function(){
+			window.location.href = `${window.location.href.split(/&page=[0-9]+/).join("")}&page=${$("#numberPage").val()}`
+		})	
+		if(decodeURIComponent(window.location.search).indexOf("price")===-1){
+			$(`#price`).ionRangeSlider({
+		        skin: "round",
+		        keyboard: true,
+		        type: 'double',
+		        postfix: " 💸",
+		        min: 0,
+		        max: 200,
+		        step: 1000,
+		        onChange: ()=>{
+					$("#realPrice").val(`${$(`#price`).data("ionRangeSlider").old_from},${$(`#price`).data("ionRangeSlider").old_to}`)
+		        }
+		    });
+		}else{
+			$(`#price`).ionRangeSlider({
+		        skin: "round",
+		        keyboard: true,
+		        type: 'double',
+		        postfix: " 💸",
+		        min : 0,
+		        max : Number(<%-maxPrice%>),
+		        from: Number(decodeURIComponent(window.location.search).match(/price=[0-9]+\,+[0-9]+/g)[0].split("price=").join("").split(",")[0]),
+		        to  : Number(decodeURIComponent(window.location.search).match(/price=[0-9]+\,+[0-9]+/g)[0].split("price=").join("").split(",")[1]),
+		        step: 1000,
+		        onChange: ()=>{
+		        	$("#realPrice").val(`${$(`#price`).data("ionRangeSlider").old_from},${$(`#price`).data("ionRangeSlider").old_to}`)
+		        }
+		    });
+		}
+		$("#realPrice").val(`${$(`#price`).data("ionRangeSlider").old_from},${$(`#price`).data("ionRangeSlider").old_to}`)
+		for(let v of decodeURIComponent(window.location.search).split("&")){
+		    if(v.indexOf("name")!==-1){
+		    	$("#name").val(v.split("=")[1])
+		    }
+		    if(v.indexOf("specifications")!==-1){
+		    	console.log(v.split("=")[1]);
+				$("#specifications").val(v.split("=")[1])
+		    }
+		}	
+	</script>
+</body>
+</html>

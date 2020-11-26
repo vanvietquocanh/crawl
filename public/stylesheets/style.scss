@@ -1,0 +1,113 @@
+body{
+	font-family: "roboto", arial, "sans-serif";
+	font-size: 12px !important;
+	max-width: 100%;
+	overflow-x: hidden;
+	.custom-label{
+		font-size: 1em;
+		margin-bottom: 0px;
+		line-height: 2.1em;
+	}
+	.btn-hide{
+		color: #007bff;
+		cursor: pointer;
+		-webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		   -khtml-user-select: none;
+		     -moz-user-select: none;
+		      -ms-user-select: none;
+		          user-select: none;
+	}
+	.no-resize{
+		resize : none;
+	}
+	.label-info {
+	  	background-color: #007bff;
+	  	padding: 3px;
+	  	border-radius: .25em;
+	}
+	.bootstrap-tagsinput .tag [data-role="remove"]:after{
+		content: "\f00d";
+		font-weight: 600;
+    	font-size: 12px;
+		font-family: "Font Awesome 5 Free";
+
+	}
+	.customforSmartlink{
+		height: 38px;
+	}
+	.disable-320{
+		display: none;
+	}
+	.text-12{
+		font-size : 12px!important;
+	}
+	.clickToCopy, .token, .pointer-customs{
+		cursor : pointer !important;
+		  -webkit-touch-callout: none !important;
+		    -webkit-user-select: none !important;
+		     -khtml-user-select: none !important;
+		       -moz-user-select: none !important;
+		        -ms-user-select: none !important;
+		            user-select: none !important;
+	}
+	.enableSelect{
+		cursor : auto !important;
+		  -webkit-touch-callout: auto !important;
+		    -webkit-user-select: auto !important;
+		     -khtml-user-select: auto !important;
+		       -moz-user-select: auto !important;
+		        -ms-user-select: auto !important;
+		            user-select: auto !important;
+	}
+	.bootstrap-tagsinput{
+		width: 100%;
+		height: 100%;
+		display : flex;
+		input{
+			line-height: 1.77em;
+			cursor: none;
+		}
+	}
+	.main-page{
+		width: 100%;
+	}
+	.items-custom{
+		width: 100%;
+	}
+}
+@media screen and (min-width: 568px){
+	body{
+		.items-custom{
+			width: 50%;
+		}
+	}
+}
+@media screen and (min-width: 720px){
+	body{
+		.items-custom{
+			width: 33.33%;
+		}
+	}
+}
+@media screen and (min-width: 1024px){
+	body{
+		.items-custom{
+			width: 25%;
+		}
+	}
+}
+@media screen and (min-width: 1368px){
+	body{
+		.items-custom{
+			width: 20%;
+		}
+	}
+}
+@media screen and (min-width: 1400px){
+	body{
+		.items-custom{
+			width: 12.5%;
+		}
+	}
+}
