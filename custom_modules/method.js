@@ -1,4 +1,3 @@
-
 module.exports = {
 	capitalize : (s) => {
 	  if (typeof s !== 'string') return ''
