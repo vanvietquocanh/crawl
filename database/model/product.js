@@ -102,6 +102,10 @@ var productSchema = new mongoose.Schema({
   },
   specifications:{
   	type: String
+  },
+  prevPrice:{
+    type: Number,
+    default: 0
   }
 },{colletion:"product"});
 // Giá , khuyến mại, ảnh , tên, đánh giá, thông số kỹ thuật
